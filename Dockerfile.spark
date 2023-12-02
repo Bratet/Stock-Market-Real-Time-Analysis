@@ -1,6 +1,6 @@
 FROM apache/spark:latest
 
-COPY ./src/spark/spark_job.py /app/
+COPY src/spark/spark_job.py /app/
 
 WORKDIR /app
 
