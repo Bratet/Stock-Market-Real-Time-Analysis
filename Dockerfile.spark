@@ -1,9 +1,0 @@
-FROM apache/spark:latest
-
-COPY src/spark/spark_job.py /app/
-
-WORKDIR /app
-
-EXPOSE 4040 8080
-
-CMD ["spark-submit", "spark_job.py"]
