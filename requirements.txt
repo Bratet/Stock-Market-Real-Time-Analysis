@@ -2,3 +2,4 @@ yfinance
 pyspark
 kafka-python
 schedule
+pandas
