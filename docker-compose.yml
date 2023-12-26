@@ -32,6 +32,40 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
       ALLOW_ANONYMOUS_LOGIN: yes
 
+  spark-master:
+    image: bitnami/spark:latest
+    volumes:
+      - ./data:/opt/spark-data
+    environment:
+      - SPARK_MODE=master
+      - SPARK_MASTER_PORT=7077
+      - SPARK_MASTER_WEBUI_PORT=8080 # Master UI port
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+    ports:
+      - "8080:8080" # Exposing Spark master UI to host
+      - "7077:7077" # Exposing Spark master communication port to host
+
+  spark-worker:
+    image: bitnami/spark:latest
+    volumes:
+      - ./data:/opt/spark-data
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+      - SPARK_WORKER_CORES=3
+      - SPARK_WORKER_MEMORY=6G
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+    depends_on:
+      - spark-master
+    ports:
+      - "8081:8081" # Worker UI port (optional, if you want to access worker UI)
+
   database:
     image: mongo:latest
     environment:

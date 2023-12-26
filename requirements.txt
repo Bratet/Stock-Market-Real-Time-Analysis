@@ -4,3 +4,4 @@ kafka-python
 schedule
 pandas
 emoji
+joblib
