@@ -8,6 +8,7 @@ __pycache__/
 
 # Data files
 data/joined_data.csv
+data/scaled_data.csv
 
 # Distribution / packaging
 .Python
