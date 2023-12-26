@@ -3,3 +3,4 @@ pyspark
 kafka-python
 schedule
 pandas
+emoji
